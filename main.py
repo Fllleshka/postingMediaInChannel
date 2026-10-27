@@ -27,9 +27,6 @@ async def main():
     secondmainfolder = os.getenv('SECONDMAINFOLDER')
     mass = [firstmainfolder, secondmainfolder]
 
-    # Удаление данных
-    deletedates()
-
     # Проверка на наличие базы данных
     for elem in mass:
         dbase = database(elem)

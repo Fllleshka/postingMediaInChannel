@@ -29,8 +29,6 @@ class work():
         self.insertDatesOnDay = (datetime.datetime.today() +
                             datetime.timedelta(seconds=20)).strftime("%H:%M:%S")
 
-        self.printdates()
-
     def printdates(self):
         print(f"=============")
         print(f"BotKey: \t\t\t{self.botkey}")
@@ -110,7 +108,7 @@ class work():
         media = FSInputFile(pathtodate)
         try:
             if date.endswith(".mp4"):
-                if self.chevideofile(pathtodate) > 10:
+                if await self.chevideofile(pathtodate) > 10:
                     await self.bot.send_video(chat_id=self.idchannel,
                                           video = media,
                                           caption=self.namechennel)
@@ -125,6 +123,7 @@ class work():
         except TelegramRetryAfter as e:
             # Ошибка Flood Control (слишком много запросов). Telegram сам говорит, сколько ждать.
             print(f"Превышен лимит запросов.")
+            await asyncio.sleep(e.retry_after)
 
         except TelegramNetworkError as e:
             # Ошибка сети (таймауты, потеря соединения, проблемы с прокси/VPN)
@@ -158,7 +157,7 @@ class work():
         return result
 
     # Функция вычисления времени видео
-    def chevideofile(self, pathtovideofile):
+    async def chevideofile(self, pathtovideofile):
         try:
             clip = VideoFileClip(pathtovideofile)
             duration = clip.duration

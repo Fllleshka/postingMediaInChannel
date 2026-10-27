@@ -157,21 +157,21 @@ class database:
                 # Считаем "идеальный шаг" на основе оставшихся элементов
                 # и выбираем тот массив, чей элемент сейчас нужнее для баланса
                 if (count1 + 1) * len2 <= (count2 + 1) * len1:
-                    res = self.appendelemimsilt(res, arrayfirst[i])
+                    res = self.appendelemimsilt(res, shuffledfirst[i])
                     i += 1
                     count1 += 1
                 else:
-                    res = self.appendelemimsilt(res, arraysecond[j])
+                    res = self.appendelemimsilt(res, shuffledsecond[j])
                     j += 1
                     count2 += 1
 
             elif i < len1:
                 # Если второй массив закончился, забираем остатки первого
-                res = self.appendelemimsilt(res, arrayfirst[i])
+                res = self.appendelemimsilt(res, shuffledfirst[i])
                 i += 1
             else:
                 # Если первый массив закончился, забираем остатки второго
-                res = self.appendelemimsilt(res, arraysecond[j])
+                res = self.appendelemimsilt(res, shuffledsecond[j])
                 j += 1
 
         return res
